@@ -1,73 +1,13 @@
+
   git config --global user.name "Enver Onder Uslu"
   git config --global user.email "enveronderuslu@gmail.com"
   git clone https://github.com/enveronderuslu/huawei_DevOps_Kursu.git
   git version
-   
-   21  sudo nano .bashrc 
-   22  source .bashrc
-   23  c
-   24  git version 
-   25  https://github.com/enveronderuslu/Problems_in-Euler_Project.git
-25
-   26  git config --global user.name "Enver Onder Uslu"
-   27  git config --global user.email "enveronderuslu@gmail.com"
-   28  git clone https://github.com/enveronderuslu/huawei_DevOps_Kursu.git
-   29  git clone https://github.com/enveronderuslu/huawei_DevOps_Kursu.git
-   32  cd huawei_DevOps_Kursu/
-   33  nano README.md
-   34   
-   35  git status
-   36  git add README.txt 
-   37  git status
-   38  nano README.txt 
-   39  git status
-   40  git add README.txt 
-   41  git status
-   42  git commit -m "first commit: README added"
-   43  git status
-   44  git checkout -b dev
-   45  nano bootcamp.py
-   46  python3 bootcamp.py 
-   47  ls
-   48  git add bootcamp.py 
-   49  git commit  -m "bootcamp dosyasi eklendi"
-   50  git status
-   51  git checkout main 
-   52 
-   53  cp README.txt README.md
-   54  ls
-   55  cat README.txt
-   56  cat > README.md
-   57  rm README.txt
-   58  git status
-   59  git add README.md
-   60  ls
-   61  git rm README.txt
-   62  git status
-   63  c
-   64  git status
-   65  nano hello.py
-   66  git add hello.py 
-   67  git status
-   68  git commit  -m "hello.py dosyasi eklendi"
-   69  git status
-   70  git merge dev
-   71  git status
-   72  ls
-   73  git stazus 
-   74  git status 
+  
    75  git push origin main 
    76  git push origin dev
    77  git pull origin main
-   78  ls
-   79  python3 hello.py 
-   80  cd ..
-   81  ls
 
-
-   84  sudo apt update
-   85  sudo apt install docker.io 
- sudo apt install docker.io
 //////////*******************////////////////////
 sudo usermod -aG docker enver (her docker  dan önce sudo yazmak istemiyorsan bunu calistir sonra reboot yap)
 //////////*******************////////////////////
@@ -118,17 +58,6 @@ alistirmavol:/test:ro  yazarsan dosyayi sadece okuyabilirsin
 "docker container run --name  websitesi1 -d -p 80:80  -v /home/kali/Desktop/websunuc:/usr/local/apache2/htdocs                     ozgurozturknet/adanzyedocker
 "
 volume olusturmadan masaüstünde bir dosyayi bagladim. masaüstündeki dosyada ne yaparsam artik container icinde  o görünecek
-
-
-
-
-
-
-
-
-
-
-
 
   
 docker container run -it -v firstvolume:/uygulama alpine sh
