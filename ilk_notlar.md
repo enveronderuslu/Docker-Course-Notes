@@ -1,7 +1,3 @@
-GITHUB_TOKEN
-
-ghp_bYdE7fYcMSz2xVGXmO8UfDzqcs7zjhlI8QA
-
   git config --global user.name "Enver Onder Uslu"
   git config --global user.email "enveronderuslu@gmail.com"
   git clone https://github.com/enveronderuslu/huawei_DevOps_Kursu.git
