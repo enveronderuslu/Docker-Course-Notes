@@ -1,16 +1,8 @@
 
-  git config --global user.name "Enver Onder Uslu"
-  git config --global user.email "enveronderuslu@gmail.com"
-  git clone https://github.com/enveronderuslu/huawei_DevOps_Kursu.git
-  git version
+git config --global user.name "Enver Onder Uslu"
+git config --global user.email "enveronderuslu@gmail.com"
 
-   75  git push origin main 
-   76  git push origin dev
-   77  git pull origin main
-
-//////////*******************////////////////////
-sudo usermod -aG docker enver (her docker  dan önce sudo yazmak istemiyorsan bunu calistir sonra reboot yap)
-//////////*******************////////////////////
+sudo usermod -aG docker enver sonra reboot yap
 
 docker version
 docker info
@@ -19,15 +11,55 @@ Mesela managementt commands var.  örnegin
 docker image --help  (image burada management command)
 
 portainer.io  burada web araayüzü kullanarak one can compose docker
-docker imaji bie linux dagitimi icinde cekirdek olmayani 
+
+What is docker imaji? bir linux dagitimi icinde cekirdek olmayani 
+
 docker image rm --help
- örnek: docker container run --name firstcontainer  ozgurozturknet/app1
+
+docker container run --name firstcontainer  ozgurozturknet/app1
 
 dockerhub tan ozgur… image ini cekti. lokalde firstco.. isimli bir container olusturup calistirdi 
 
 container i arka planda calistirmak icin -d kullanilir
 
 docker container run -d -p 80:80 --name  deneme  ozgurozturknet/adanzyedocker
+
+Açıklama:
+ 
+-p <host_port>:<container_port>
+Yani:
+
+Soldaki 80 → senin Kali (host) sistemindeki port 80
+
+Sağdaki 80 → container içindeki port 80
+
+Ne işe yarar?
+Container içinde çalışan uygulama (örneğin bir web sunucusu), 80 numaralı portu kullanıyorsa…
+
+Bu seçenek sayesinde:
+
+Tarayıcıda http://localhost ya da http://127.0.0.1 yazarsan,
+
+host makinedeki 80 numaralı port, container içindeki web uygulamasına yönlendirilir.
+
+Örnek:
+Container içinde Apache/Nginx varsa ve 80. porttan yayın yapıyorsa:
+ 
+docker container run -d -p 80:80 --name site apache
+Sonra tarayıcıda:
+ 
+http://localhost
+→ Apache açılır  
+
+İstersen farklı portlar da kullanabilirsin:
+ 
+-p 8080:80
+Bu durumda:
+
+Host: http://localhost:8080
+
+Container: yine port 80
+
 
 docker  ps -a  calisaan calismayan tüm containerlari  listeler
 
@@ -68,13 +100,10 @@ docker container run --rm -it -v secvol:/sectest ozgurozturknet/adanzyedocker sh
 burada --rm : container kapatilinca otomatik sil denmek
 
 docker container run -d -p 80:80 -v  /home/kali/Desktop/bolum28/websitesi:/usr/share/nginx/html nginx
- burada nginx html ve lokaldeki websitesi dosyalarini mount ettim ve artik icerigi lokalden cekiyor. zirt pirt iceri girmek zorunda kalmiyorum
-/
-
+burada nginx html ve lokaldeki websitesi dosyalarini mount ettim ve artik icerigi lokalden cekiyor. zirt pirt iceri girmek zorunda kalmiyorum
 //////////****************///////////////
 
 docker system prune -a herseyi siler. calisir vaziyettikileri stop etmelisin
-
 
 cat /etc/os-release
 
