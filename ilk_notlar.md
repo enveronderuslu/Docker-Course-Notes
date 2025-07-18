@@ -3,7 +3,7 @@
   git config --global user.email "enveronderuslu@gmail.com"
   git clone https://github.com/enveronderuslu/huawei_DevOps_Kursu.git
   git version
-  
+
    75  git push origin main 
    76  git push origin dev
    77  git pull origin main
@@ -19,7 +19,7 @@ Mesela managementt commands var.  örnegin
 docker image --help  (image burada management command)
 
 portainer.io  burada web araayüzü kullanarak one can compose docker
-
+docker imaji bie linux dagitimi icinde cekirdek olmayani 
 docker image rm --help
  örnek: docker container run --name firstcontainer  ozgurozturknet/app1
 
