@@ -62,7 +62,7 @@ volume olusturmadan masaüstünde bir dosyayi bagladim. masaüstündeki dosyada 
   
 docker container run -it -v firstvolume:/uygulama alpine sh
 
-olusturdugum firstvolume alpine container icinde  uygulama dosyasina baglandi. Container artik uygulama dosyasina kayit yapiyor gibi calisacak fakat firstvolume tarafina kaydedilecek.
+olusturdugum firstvolume alpine container i icinde  uygulama dosyasina baglandi. Container artik uygulama dosyasina kayit yapiyor gibi calisacak fakat firstvolume tarafina kaydedilecek.
  
 docker container run --rm -it -v secvol:/sectest ozgurozturknet/adanzyedocker sh
 burada --rm : container kapatilinca otomatik sil denmek
@@ -95,146 +95,121 @@ objeyle ilgili detayli bilgiler verilir
 
 
 
+
+
+
+
+
 DOCKER 101 (LINUX)
 
 1. WHAT IS DOCKER?
 ----------------------
-Docker is an open-source platform that allows software to run in isolated environments called containers. Containers are lightweight structures that contain all dependencies of the application and run the same way everywhere.
-
-Advantages:
-- Lightweight and fast
-- Dependency isolation
-- Portability (runs the same in every environment)
-- Suitable for microservice architectures
-- Consistency in dev, test, and prod environments
+Docker software to run in isolated environments called containers. 
 
 2. KEY CONCEPTS
 ----------------------
-Image: A read-only template with all configuration needed to create a container.
-Container: A running instance of an image in an isolated environment.
-Dockerfile: Script file used to create Docker images.
-Volume: Used for persistent data storage. Data survives even if the container is removed.
-Network: Enables containers to communicate with each other.
-Registry: Server where Docker images are stored and shared (e.g. Docker Hub).
-
-3. INSTALLING DOCKER ON LINUX (Ubuntu/Debian)
------------------------------------------------
-In the terminal, run the following:
-
-sudo apt update
-sudo apt install apt-transport-https ca-certificates curl gnupg lsb-release
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/docker.gpg
-echo "deb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | \
-sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt update
-sudo apt install docker-ce docker-ce-cli containerd.io
-
-After installation:
-
-sudo systemctl enable docker
-sudo systemctl start docker
-
-Check Docker version:
-docker --version
-
-To run Docker without sudo:
-sudo usermod -aG docker $USER
-exit
-(then log back in or run 'newgrp docker')
+Image: A read-only template with all configuration needed to create a container  
+Container: A running instance of an image in an isolated environment  
+Dockerfile: Script file used to define and build Docker images  
+Volume: Persistent storage for data that survives container removal  
+Network: Allows communication between containers  
+Registry: A server to store and share Docker images (e.g., Docker Hub)
 
 4. BASIC DOCKER COMMANDS
 ------------------------------
-docker version              # Show version info
-docker info                 # Show system info
-docker images               # List images
-docker ps                   # List running containers
-docker ps -a                # List all containers
-docker pull <image>         # Download image
-docker run <image>          # Run container
-docker run -it ubuntu bash  # Interactive terminal
-docker run -d -p 8080:80 nginx  # Port mapping
-docker stop <id>            # Stop container
-docker rm <id>              # Remove container
-docker rmi <image_id>       # Remove image
-docker logs <id>            # View logs
-docker exec -it <id> bash   # Enter container shell
+docker version              # Show Docker version  
+docker info                 # Display system-wide information  
+docker images               # List available images  
+docker ps                   # List running containers  
+docker ps -a                # List all containers (including stopped ones)  
+docker pull <image>         # Download an image from a registry  
+docker run <image>          # Run a container from an image  
+docker run -it ubuntu bash  # Start interactive terminal inside a container  
+docker run -d -p 8080:80 nginx  # Run container in background  
+docker stop <id>            # Stop a running container  
+docker rm <id>              # Remove a container  
+docker rmi <image_id>       # Remove an image  
+docker logs <id>            # Show logs from a container  
+docker exec -it <id> bash   # Access a running container's shell
 
 5. DOCKERFILE
 ----------------------
-Example for a Python Flask app:
+Example Dockerfile for a Python Flask app:
 
-FROM python:3.9-slim
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-COPY . .
+FROM python:3.9-slim  
+WORKDIR /app  
+COPY requirements.txt .  
+RUN pip install -r requirements.txt  
+COPY . .  
 CMD ["python", "app.py"]
 
-Build image:
+Build the image:
 docker build -t myflaskapp .
 
 6. VOLUMES (PERSISTENT DATA)
 ------------------------------
-Create volume:
+Create a volume:
 docker volume create mydata
 
-Run container with volume:
+Run a container with a named volume:
 docker run -v mydata:/data ubuntu
 
-Mount local directory:
+Mount current local directory into container:
 docker run -v $(pwd):/app ubuntu
 
 7. NETWORK
 ------------------------------
-Create network:
+Create a custom network:
 docker network create mynetwork
 
-Run containers in the same network:
-docker run -d --network=mynetwork --name web nginx
+Run containers on the same network:
+docker run -d --network=mynetwork --name web nginx  
 docker run -it --network=mynetwork ubuntu
 
 8. DOCKER COMPOSE
 ------------------------------
 Example docker-compose.yml:
 
-version: "3"
-services:
-  app:
-    build: .
-    ports:
-      - "5000:5000"
-  redis:
+version: "3"  
+services:  
+  app:  
+    build: .  
+    ports:  
+      - "5000:5000"  
+  redis:  
     image: "redis:alpine"
 
 Commands:
-docker-compose up
-docker-compose down
-docker-compose build
+docker-compose up             # Start services  
+docker-compose down           # Stop and remove services  
+docker-compose build          # Build services from Dockerfile
 
 9. CLEANUP COMMANDS
 ------------------------------
-Remove stopped containers:
+Remove all stopped containers:
 docker container prune
 
-Remove unused images:
+Remove all unused images:
 docker image prune -a
 
-Remove unused volumes:
+Remove all unused volumes:
 docker volume prune
 
-Remove unused networks:
+Remove all unused networks:
 docker network prune
 
-Remove everything:
+Remove everything not in use:
 docker system prune -a --volumes
 
-10. USEFUL ALIASES (for bashrc or zshrc)
------------------------------------------
-alias dps="docker ps"
-alias dpa="docker ps -a"
-alias dimg="docker images"
-alias drm="docker rm \$(docker ps -aq)"
-alias dclean="docker system prune -a --volumes -f"
+10. USEFUL ALIASES (for .bashrc or .zshrc)
+-------------------------------------------
+alias dps="docker ps"  
+alias dpa="docker ps -a"  
+alias dimg="docker images"  
+alias drm="docker rm \$(docker ps -aq)"  
+ACHTUNG AQ: Burada \ isaretini tirnak icinde kullanirsin . Dolar isaretu düz metin olarak algilanmali. Normal kod olarak calistiracakasan: docker stop $(docker ps -aq)   ve sonra docker rm $(docker ps -aq) calstirirsin.  
+
+alias dclean="docker system prune -a --volumes -f"  
 alias dexec="docker exec -it"
 
 11. EXTRA COMMANDS
@@ -242,8 +217,8 @@ alias dexec="docker exec -it"
 Get container IP address:
 docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <id>
 
-Copy file to container:
+Copy a file into a container:
 docker cp ./file.txt <id>:/target
 
-Ping another container (must be in same network):
+Ping another container (in the same Docker network):
 docker exec -it <id> ping <other_container_name>
