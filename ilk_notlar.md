@@ -12,24 +12,22 @@ docker image --help  (image burada management command)
 
 portainer.io  burada web araayüzü kullanarak one can compose docker
 
-What is docker imaji? bir linux dagitimi icinde cekirdek olmayani 
+What is docker imaji? bir linux dagitimi icinde cekirdek olmayani. Bir Blueprint. Her yerde bi comtainer olusturursun
 
 docker image rm --help
 
 docker container run --name firstcontainer  ozgurozturknet/app1
 
-dockerhub tan ozgur… image ini cekti. lokalde firstco.. isimli bir container olusturup calistirdi 
-
 container i arka planda calistirmak icin -d kullanilir
 
-docker container run -d -p 80:80 --name  deneme  ozgurozturknet/adanzyedocker
+docker container run -d -p 8081:80 --name  deneme  ozgurozturknet/adanzyedocker
 
 Açıklama:
  
 -p <host_port>:<container_port>
 Yani:
 
-Soldaki 80 → senin Kali (host) sistemindeki port 80
+Soldaki 8081 → senin Kali (host) sistemindeki port 80
 
 Sağdaki 80 → container içindeki port 80
 
@@ -38,44 +36,14 @@ Container içinde çalışan uygulama (örneğin bir web sunucusu), 80 numaralı
 
 Bu seçenek sayesinde:
 
-Tarayıcıda http://localhost ya da http://127.0.0.1 yazarsan,
-
-host makinedeki 80 numaralı port, container içindeki web uygulamasına yönlendirilir.
-
-Örnek:
-Container içinde Apache/Nginx varsa ve 80. porttan yayın yapıyorsa:
- 
-docker container run -d -p 80:80 --name site apache
-Sonra tarayıcıda:
- 
-http://localhost
-→ Apache açılır  
-
-İstersen farklı portlar da kullanabilirsin:
- 
--p 8080:80
-Bu durumda:
-
-Host: http://localhost:8080
-
-Container: yine port 80
-
+Tarayıcıda http://localhost:8081 ya da http://127.0.0.1:8081 yazarsan, host makinedeki 8081 numaralı port, container içindeki web uygulamasına yönlendirilir.
 
 docker  ps -a  calisaan calismayan tüm containerlari  listeler
-
 docker container rm -f 236 861   bunlar id lerin ilk üc basamagi. hepini yazmaya gerek yok
 
-docker container exec -it websunucu sh         Calisan bir container a exec komutuyla baglaniyoruz. Execute uygula Peki neyin üzerinde websunucu üzerinde . sh ise uygulama alpine ile yazildigindan o distronun shell ine baglanmak icin. image ubuntu tabanli olaydi bash kullanirdik. ( 
--i (veya --interactive)
-Bu, etkileşimli modda çalışmanı sağlar. Yani terminal girişini açık tutar. Sen komut yazabilesin diye stdin’i (standart giriş) aktif hale getirir.
+docker container exec -it websunucu sh 
 
-🔹 -t (veya --tty)
-Bu da terminal (TTY) emülasyonu sağlar. Yani komutları çalıştırabileceğin bir terminal ekranı gibi davranır.
-
-🔹 Kısacası -it birlikte şunu yapar:
-Container içinde terminal açar, seninle iletişim kuracak şekilde aktif halde tutar. Özellikle bash veya sh gibi shell komutlarıyla içine girerken çok kullanılır.)
-
-komut calistiktan sonra ps yazarsan cont icinde calisan uygulamalari  görürsün. Docker her zaman buradaki pid 1 uygulamayi gözler ve bunu calistirir. Mesela conta… shell de "kill  1" calistirsan direk seni ana sshele atar. container durur. docker ps ile kontroö et. -a yazma duran durmayan hepini gösterir. Docker start deyince tekrar calismaya baslar
+-it birlikte şunu yapar: Container içinde terminal açar, seninle iletişim kuracak şekilde aktif halde tutar. Özellikle bash veya sh gibi shell komutlarıyla içine girerken çok kullanılır.
 
 dteached calisan bi container in loglari "docker logs container_adi" ile görülebilir
 
@@ -94,7 +62,7 @@ volume olusturmadan masaüstünde bir dosyayi bagladim. masaüstündeki dosyada 
   
 docker container run -it -v firstvolume:/uygulama alpine sh
 
-olusturdugum firstvolume alpine container i icinde  uygulama dosyasina baglandi. Container artik uygulama dosyasina kayit yapiyor gibi calisacak fakat firstvolume tarafina kaydedilecek.
+olusturdugum firstvolume alpine container icinde  uygulama dosyasina baglandi. Container artik uygulama dosyasina kayit yapiyor gibi calisacak fakat firstvolume tarafina kaydedilecek.
  
 docker container run --rm -it -v secvol:/sectest ozgurozturknet/adanzyedocker sh
 burada --rm : container kapatilinca otomatik sil denmek
@@ -122,3 +90,160 @@ sonra """ docker build  -t enver . """ calistirilir ve enver:latest  image olust
 ///////////****************///////////////
  docker container (image, network, volume) inspect container_adi
 objeyle ilgili detayli bilgiler verilir
+
+
+
+
+
+DOCKER 101 (LINUX)
+
+1. WHAT IS DOCKER?
+----------------------
+Docker is an open-source platform that allows software to run in isolated environments called containers. Containers are lightweight structures that contain all dependencies of the application and run the same way everywhere.
+
+Advantages:
+- Lightweight and fast
+- Dependency isolation
+- Portability (runs the same in every environment)
+- Suitable for microservice architectures
+- Consistency in dev, test, and prod environments
+
+2. KEY CONCEPTS
+----------------------
+Image: A read-only template with all configuration needed to create a container.
+Container: A running instance of an image in an isolated environment.
+Dockerfile: Script file used to create Docker images.
+Volume: Used for persistent data storage. Data survives even if the container is removed.
+Network: Enables containers to communicate with each other.
+Registry: Server where Docker images are stored and shared (e.g. Docker Hub).
+
+3. INSTALLING DOCKER ON LINUX (Ubuntu/Debian)
+-----------------------------------------------
+In the terminal, run the following:
+
+sudo apt update
+sudo apt install apt-transport-https ca-certificates curl gnupg lsb-release
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/docker.gpg
+echo "deb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | \
+sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io
+
+After installation:
+
+sudo systemctl enable docker
+sudo systemctl start docker
+
+Check Docker version:
+docker --version
+
+To run Docker without sudo:
+sudo usermod -aG docker $USER
+exit
+(then log back in or run 'newgrp docker')
+
+4. BASIC DOCKER COMMANDS
+------------------------------
+docker version              # Show version info
+docker info                 # Show system info
+docker images               # List images
+docker ps                   # List running containers
+docker ps -a                # List all containers
+docker pull <image>         # Download image
+docker run <image>          # Run container
+docker run -it ubuntu bash  # Interactive terminal
+docker run -d -p 8080:80 nginx  # Port mapping
+docker stop <id>            # Stop container
+docker rm <id>              # Remove container
+docker rmi <image_id>       # Remove image
+docker logs <id>            # View logs
+docker exec -it <id> bash   # Enter container shell
+
+5. DOCKERFILE
+----------------------
+Example for a Python Flask app:
+
+FROM python:3.9-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+CMD ["python", "app.py"]
+
+Build image:
+docker build -t myflaskapp .
+
+6. VOLUMES (PERSISTENT DATA)
+------------------------------
+Create volume:
+docker volume create mydata
+
+Run container with volume:
+docker run -v mydata:/data ubuntu
+
+Mount local directory:
+docker run -v $(pwd):/app ubuntu
+
+7. NETWORK
+------------------------------
+Create network:
+docker network create mynetwork
+
+Run containers in the same network:
+docker run -d --network=mynetwork --name web nginx
+docker run -it --network=mynetwork ubuntu
+
+8. DOCKER COMPOSE
+------------------------------
+Example docker-compose.yml:
+
+version: "3"
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+  redis:
+    image: "redis:alpine"
+
+Commands:
+docker-compose up
+docker-compose down
+docker-compose build
+
+9. CLEANUP COMMANDS
+------------------------------
+Remove stopped containers:
+docker container prune
+
+Remove unused images:
+docker image prune -a
+
+Remove unused volumes:
+docker volume prune
+
+Remove unused networks:
+docker network prune
+
+Remove everything:
+docker system prune -a --volumes
+
+10. USEFUL ALIASES (for bashrc or zshrc)
+-----------------------------------------
+alias dps="docker ps"
+alias dpa="docker ps -a"
+alias dimg="docker images"
+alias drm="docker rm \$(docker ps -aq)"
+alias dclean="docker system prune -a --volumes -f"
+alias dexec="docker exec -it"
+
+11. EXTRA COMMANDS
+------------------------------
+Get container IP address:
+docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <id>
+
+Copy file to container:
+docker cp ./file.txt <id>:/target
+
+Ping another container (must be in same network):
+docker exec -it <id> ping <other_container_name>
