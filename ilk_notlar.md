@@ -148,13 +148,42 @@ docker build -t myflaskapp .
 
 6. VOLUMES (PERSISTENT DATA)
 ------------------------------
-Create a volume:
-docker volume create mydata
 
-Run a container with a named volume:
-docker run -v mydata:/data ubuntu
+Docker Volume & Bind Mount Notes
+------------------------------
+Create a volume with:
+docker volume create firstvolume
+List existing volumes:
+docker volume ls
+View detailed info:
+docker volume inspect firstvolume
+Pay special attention to the Mountpoint field—this shows where the volume is stored on the host system.
 
-Mount current local directory into container:
+Attaching a Volume to a Container
+docker container run -it -v firstvolume:/the_folder_in_container <image> sh
+firstvolume: the volume name on the host.
+
+/the_folder_in_container: the mount path inside the container (automatically created if it doesn’t exist).
+
+Deleting and recreating the container won’t delete your data—mounting the same volume to the same path preserves it.
+
+One volume can be shared by multiple containers simultaneously.
+
+-v firstvolume:/the_folder_in_container:ro
+
+🔹 Bind Mounts
+Instead of a Docker-managed volume, you can mount a host folder directly into the container:
+
+docker run -p 8081:80 \
+  --name some-nginx \
+  -v /home/kali/Desktop/HTMLCSS/CSS_101:/usr/share/nginx/html:ro \
+  -d nginx
+/home/kali/Desktop/HTMLCSS/CSS_101: a directory on the host.
+
+/usr/share/nginx/html: the mount point inside the container.
+
+-d runs the container in detached (background) mode.Mount current local 
+Example: directory into container:
 docker run -v $(pwd):/app ubuntu
 
 7. NETWORK
