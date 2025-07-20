@@ -215,26 +215,22 @@ docker-compose build          # Build services from Dockerfile
 
 9. CLEANUP COMMANDS
 ------------------------------
-Remove all stopped containers:
-docker container prune
+Remove stopped containers: docker container prune
 
-Remove all unused images:
-docker image prune -a
+Remove unused images: docker image prune -a
 
-Remove all unused volumes:
-docker volume prune
+Remove unused volumes: docker volume prune
 
-Remove all unused networks:
-docker network prune
+Remove unused networks: docker network prune
 
-Remove everything not in use:
-docker system prune -a --volumes
+Remove everything not in use: docker system prune -a --volumes
 
 10. USEFUL ALIASES (for .bashrc or .zshrc)
 -------------------------------------------
 alias dps="docker ps"  
 alias dpa="docker ps -a"  
-alias dimg="docker images"  
+alias dimg="docker images"
+  
 alias drm="docker rm \$(docker ps -aq)"  
 ACHTUNG AQ: Burada \ isaretini tirnak icinde kullanirsin . Dolar isaretu düz metin olarak algilanmali. Normal kod olarak calistiracakasan: docker stop $(docker ps -aq)   ve sonra docker rm $(docker ps -aq) calstirirsin.  
 
