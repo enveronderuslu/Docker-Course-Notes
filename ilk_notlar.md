@@ -250,8 +250,11 @@ Remove unused volumes: docker volume prune
 Remove unused networks: docker network prune
 
 Remove everything not in use: docker system prune -a --volumes
+10. ENVIROMENT VARIABLES
+-------------------------------------------
 
-10. USEFUL ALIASES (for .bashrc or .zshrc)
+
+11. USEFUL ALIASES (for .bashrc or .zshrc)
 -------------------------------------------
 alias dps="docker ps"  
 alias dpa="docker ps -a"  
@@ -263,7 +266,7 @@ ACHTUNG AQ: Burada \ isaretini tirnak icinde kullanirsin . Dolar isaretu düz me
 alias dclean="docker system prune -a --volumes -f"  
 alias dexec="docker exec -it"
 
-11. EXTRA COMMANDS
+12. EXTRA COMMANDS
 ------------------------------
 Get container IP address:
 docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <id>
@@ -273,3 +276,13 @@ docker cp ./file.txt <id>:/target
 
 Ping another container (in the same Docker network):
 docker exec -it <id> ping <other_container_name>
+
+
+container icine giris cikis zor diye 
+docker container logs <cont.name>
+docker container top <container_name>
+docker container stats (host üzerinde calisan tüm containerlat)
+docker container stats <con> (host üzeriindeki con containeri )
+--memory=limit ile ram kullanimini sinirlayabilirsin. 
+ram kullanimi asarsa swap icin yer ayarlanabilir --memory-swap=limit
+--cpus="1.5" sadece 1.5  tane cpu kullanacak
