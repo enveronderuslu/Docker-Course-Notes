@@ -191,13 +191,30 @@ docker run -v $(pwd):/app ubuntu
 docker network ls 
 docker network inspect bridge
 docker container run -it --net host  --name deneme  ozgurozturknet/adanzyedocker
-böylece default yerine host network kullanildi. Böylece izolasyon kalkti ve üzerinde calistigi makineyle ayni agdaymis gibi calisti. 
-Create a custom network:
-docker network create mynetwork
+böylece default yerine host network kullanildi. Böylece izolasyon kalkti ve üzerinde calistigi makineyle ayni agdaymis gibi calisti.
 
-Run containers on the same network:
-docker run -d --network=mynetwork --name web nginx  
-docker run -it --network=mynetwork ubuntu
+CASE STUDY
+srever da container lari gruplamak ve gruplar arasinda keine Verbindung istiyorum. O zaman birden fazla bridge network gerekir.Ayrica default bridge network icinde birbirlerinin isimlerini cözemezler. Napalim AQ?
+
+Create a custom network:
+sunmet1/2 olusturp iclerine  websunucu1/2 va database1/2 koyacaz
+docker network create subnet1 
+docker network ls
+docker network create subnet2
+docker network inspect subnet1
+docker network inspect subnet2
+
+----subnetler olusturuldu
+
+docker container run -dit --name  websunucu1 --net subnet1  ozgurozturknet/adanzyedocker
+docker container run -dit --name  database1 --net subnet1  ozgurozturknet/adanzyedocker 
+docker container exec -it websunucu1 bash
+docker container run -dit --name  websunucu2 --net subnet2  ozgurozturknet/adanzyedocker
+docker container run -dit --name  database2 --net subnet2  ozgurozturknet/adanzyedocker
+
+docker container exec -it websunucu2 sh
+ping database2 calisir
+ping websunucu 1 calismaz. farkli networkteler
 
 8. DOCKER COMPOSE
 ------------------------------
