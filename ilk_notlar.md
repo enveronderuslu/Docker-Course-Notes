@@ -171,7 +171,7 @@ One volume can be shared by multiple containers simultaneously.
 
 -v firstvolume:/the_folder_in_container:ro
 
-🔹 Bind Mounts
+Bind Mounts
 Instead of a Docker-managed volume, you can mount a host folder directly into the container:
 
 docker run -p 8081:80 \
@@ -188,6 +188,10 @@ docker run -v $(pwd):/app ubuntu
 
 7. NETWORK
 ------------------------------
+docker network ls 
+docker network inspect bridge
+docker container run -it --net host  --name deneme  ozgurozturknet/adanzyedocker
+böylece default yerine host network kullanildi. Böylece izolasyon kalkti ve üzerinde calistigi makineyle ayni agdaymis gibi calisti. 
 Create a custom network:
 docker network create mynetwork
 
