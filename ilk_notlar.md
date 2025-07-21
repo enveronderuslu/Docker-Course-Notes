@@ -36,7 +36,7 @@ Container içinde çalışan uygulama (örneğin bir web sunucusu), 80 numaralı
 
 Bu seçenek sayesinde:
 
-Tarayıcıda http://localhost:8081 ya da http://127.0.0.1:8081 yazarsan, host makinedeki 8081 numaralı port, container içindeki web uygulamasına yönlendirilir.
+Tarayıcıda http://localhost:8081 ya da http://127.0.0.1:8081 yazarsan, host makinedeki 8081 numaralı port, container içindeki web uygulamasına yönlendirilir. hostun 8081 portuna gelenleri containerin 80 portuna yönlendirilir
 
 docker  ps -a  calisaan calismayan tüm containerlari  listeler
 docker container rm -f 236 861   bunlar id lerin ilk üc basamagi. hepini yazmaya gerek yok
