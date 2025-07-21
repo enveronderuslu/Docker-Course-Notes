@@ -216,6 +216,11 @@ docker container exec -it websunucu2 sh
 ping database2 calisir
 ping websunucu 1 calismaz. farkli networkteler
 
+bir container üretilen bir subnet e baglanurmi
+docker network connect subnet1 websunucu2 (disconnect de mümkün)
+
+artik websunucu2 mknesi subnet1 icinde de görünüyor. 
+
 8. DOCKER COMPOSE
 ------------------------------
 Example docker-compose.yml:
