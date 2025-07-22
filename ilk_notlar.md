@@ -1,3 +1,5 @@
+Build Once, Run Anywhere
+
 [Ansible, Teraform, Openshift, OpenStack]
 git config --global user.name "Enver Onder Uslu"
 git config --global user.email "enveronderuslu@gmail.com"
