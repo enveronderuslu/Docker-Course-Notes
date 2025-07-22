@@ -212,7 +212,7 @@ docker container exec -it websunucu1 bash
 docker container run -dit --name  websunucu2 --net subnet2  ozgurozturknet/adanzyedocker
 docker container run -dit --name  database2 --net subnet2  ozgurozturknet/adanzyedocker
 
-docker container exec -it websunucu2 sh
+docker container exec -it websunucu2 sh (at the creation of container 'docker run -it  --name mycon2  --env VAR1=deneme1 ubuntu sh' yazarsan  direk iceri girersin)
 ping database2 calisir
 ping websunucu 1 calismaz. farkli networkteler
 
@@ -250,8 +250,19 @@ Remove unused volumes: docker volume prune
 Remove unused networks: docker network prune
 
 Remove everything not in use: docker system prune -a --volumes
+
 10. ENVIROMENT VARIABLES
 -------------------------------------------
+isletim sistemi düzeyinde tanimli ve her yerden cagrilabilen degiskenler.
+piton code daki variable sadece orada gecerli lokal. 
+
+Get-ChildItem Env: windowstaki variables verir
+örnegin HOME variable \Users\enver dir. Yani " cd $HOME " ile home directory olan yere gidersin 
+Env:mekan="C:\Users\enver\Desktop"
+Peki linuxta?  printenv ile hepini cagir. yenisini olusturmak istieisen '└─# export testcik="/home/kali/Desktop/envanter"'.  Permanent olmasi  icin bunu .bashrc icine yazman  gerekir-
+Docker da nasil olustururum: 
+docker run -it -d --env VAR1=deneme1 ubuntu
+docker run -it  --name mycon  --env-file /home/kali/envlist  ubuntu sh  Burada birden fazla degisken dosya icine yazilarak otomatik atanir
 
 
 11. USEFUL ALIASES (for .bashrc or .zshrc)
