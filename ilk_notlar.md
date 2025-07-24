@@ -174,12 +174,9 @@ docker run -it  --name mycon  --env-file /home/kali/envlist  ubuntu sh  Burada b
 -------------------------------------------
 alias dps="docker ps"  
 alias dpa="docker ps -a"  
-alias dimg="docker images"
-alias drm="docker rm \$(docker ps -aq)"  
-
-ACHTUNG AQ: Burada \ isaretini tirnak icinde kullanirsin . Dolar isaretu düz metin olarak algilanmali. Normal kod olarak calistiracakasan: docker stop $(docker ps -aq)   ve sonra docker rm $(docker ps -aq) calstirirsin.  
-
 alias dexec="docker exec -it"
+alias drm="docker stop \$(docker ps -aq)"
+alias drm="docker rm \$(docker ps -aq)"  (ACHTUNG AQ: Burada \ isaretini tirnak icinde kullanirsin . Dolar isaretu düz metin olarak algilanmali. Normal kod olarak calistiracaksan)
 
 12. EXTRA COMMANDS
 ------------------------------
