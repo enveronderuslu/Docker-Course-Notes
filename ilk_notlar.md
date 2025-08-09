@@ -195,3 +195,6 @@ docker container stats <con> (host üzeriindeki con containeri )
 --memory=limit ile ram kullanimini sinirlayabilirsin. 
 ram kullanimi asarsa swap icin yer ayarlanabilir --memory-swap=limit
 --cpus="1.5" sadece 1.5  tane cpu kullanacak
+
+***EKLEMELER:***
+
