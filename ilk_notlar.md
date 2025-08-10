@@ -9,7 +9,7 @@ container i arka planda calistirmak icin -d kullanilir
 
 -it birlikte şunu yapar: Container içinde terminal açar, seninle iletişim kuracak şekilde aktif halde tutar. Özellikle bash veya sh gibi shell komutlarıyla içine girerken çok kullanılır.
 
-docker container run --name cont4  -p 8080:8080  -it -v alistirmavol:/test alpine sh alpin den cont4 isimli bir container  olusturup it ile icine sh ile girip alistirmavol isimli volume u test klasörüne bagladik
+`docker container run --name cont4  -p 8080:8080  -it -v alistirmavol:'/test alpine sh` alpin den cont4 isimli bir container  olusturup it ile icine sh ile girip alistirmavol isimli volume u test klasörüne bagladik
 
 docker container run --rm -it -v secvol:/sectest ozgurozturknet/adanzyedocker sh
 burada --rm : container kapatilinca otomatik sil denmek
@@ -197,4 +197,7 @@ ram kullanimi asarsa swap icin yer ayarlanabilir --memory-swap=limit
 --cpus="1.5" sadece 1.5  tane cpu kullanacak
 
 ***EKLEMELER:***
+it terminal üzerinden interaktif bicimde container ile konus. 
 
+**Enviroment Variables**
+bir web sayfasinin arka plannini sari yapalim. her defasinda rengi degistirmek icin kod icine girmek yerine `color` degiskeni tanimlayip variable icinde degisiklik yaparsin. 
