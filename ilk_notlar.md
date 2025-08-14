@@ -88,22 +88,22 @@ docker file `CMD sleep 9`yazarsan cnteynir 5 snye durur sonra sonlanir. Peki bu 
 
 # VOLUMES & Bind Mount
 ------------------------------
-Create a volume with: docker volume create firstvolume
-List existing volumes: docker volume ls
-View detailed info: docker volume inspect firstvolume
+```bash
+docker volume create firstvolume # Create a volume with 
+docker volume ls # List existing volumes
+docker volume inspect firstvolume # View detailed info 
+```
 Attaching a Volume to a Container
+```bash
 docker container run -it -v <vplume_name_Host>:/folder_in_container <image> sh
-"-v firstvolume:/the_folder_in_container:ro" seklinde de olur
-One volume can be shared by multiple containers simultaneously.
-
-You can mount a host folder directly into the container:
-
-docker run -p 8081:80 -v ~/Directory:/usr/share/nginx/html:ro  -d nginx
- 
-Example: docker run -v $(pwd):/app ubuntu
-
-docker container run -d -p 80:80 -v  ~/websitesi:/usr/share/nginx/html nginx
-burada nginx html ve lokaldeki websitesi dosyalarini mount ettim ve artik icerigi lokalden cekiyor. zirt pirt iceri girmek zorunda kalmiyorum
+```
+`-v firstvolume:/the_folder_in_container:ro` seklinde de olur. One volume can be shared by multiple containers simultaneously. You can mount a host folder directly into the container:
+### örnek
+```bash
+docker run -v $(pwd):/app ubuntu
+docker run -d -v  ~/websitesi:/usr/share/nginx/html nginx
+```
+Son örnekte nginx html ve lokaldeki websitesi dosyalarini mount ettim ve artik icerigi lokalden cekiyor. zirt pirt iceri girmek zorunda kalmiyorum
 
 # NETWORK
 ------------------------------
